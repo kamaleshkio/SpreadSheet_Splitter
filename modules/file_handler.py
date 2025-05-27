@@ -15,7 +15,6 @@ def process_excel_file(file_path, output_folder):
             df['Date'] = date
 
             output_file = os.path.join(output_folder, f"{sheet_name}.csv")
-            
             df.to_csv(output_file, index=False)
             logger.info(f"{output_file} saved successfully.")
 

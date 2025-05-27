@@ -1,25 +1,29 @@
-import logging 
+import logging
 import os
 
 def get_logger(name):
-    log_dir = 'logs'
+    log_dir = "logs"
     os.makedirs(log_dir, exist_ok=True)
     log_file = os.path.join(log_dir, "app.log")
 
     logger = logging.getLogger(name)
     logger.setLevel(logging.DEBUG)
 
+    # Console Handler
     ch = logging.StreamHandler()
     ch.setLevel(logging.INFO)
 
+    # File Handler
     fh = logging.FileHandler(log_file)
-    fh.setLevel(logging.DEBUG)  
+    fh.setLevel(logging.DEBUG)
 
-    formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
+    # Formatter
+    formatter = logging.Formatter('[%(asctime)s] [%(levelname)s] - %(message)s')
     ch.setFormatter(formatter)
     fh.setFormatter(formatter)
 
-    if not logger.hasHandlers():
+    # Add Handlers
+    if not logger.handlers:
         logger.addHandler(ch)
         logger.addHandler(fh)
 
